@@ -1,0 +1,478 @@
+/* ChopGate Proof page presentation layer.
+   Loaded after style.css and nav.css. Changes presentation only.
+   app.js and try.js are untouched. Every id, class, data- attribute and
+   data-i18n key they use is kept. */
+
+:root{
+  --pf-radius:12px;
+  --pf-gap:24px;
+  --pf-motion:160ms;
+  --pf-panel:rgba(10,13,26,.82);
+  --pf-raise:rgba(14,18,34,.92);
+  --pf-chain-ink:#06101F;
+}
+
+/* ---------- Rhythm ---------- */
+.stack{gap:var(--pf-gap)}
+.card{
+  border-radius:var(--pf-radius);
+  padding:var(--space-5);
+}
+@media (max-width:420px){
+  .card{border-radius:var(--pf-radius);padding:var(--space-4)}
+}
+.kicker{
+  font-size:12px;
+  letter-spacing:.18em;
+  margin-bottom:var(--space-3);
+  color:var(--chain);
+}
+.try .kicker{color:var(--hold)}
+.card h2{
+  font-family:var(--wm);
+  font-size:clamp(1.15rem,1.05rem + .6vw,1.5rem);
+  line-height:1.3;
+  margin-bottom:var(--space-3);
+  max-width:40ch;
+}
+.card h3.kicker{margin-top:var(--space-5)}
+
+/* ---------- Page head ---------- */
+.page-title{
+  font-family:var(--wm);
+  font-weight:600;
+  font-size:clamp(1.75rem,1.4rem + 1.6vw,2.5rem);
+  letter-spacing:-.025em;
+  line-height:1.15;
+  margin:var(--space-2) 0 0;
+}
+.page-lead{
+  margin:calc(var(--space-3) - var(--pf-gap)) 0 0;
+  color:var(--mute);
+  font-size:1.0625rem;
+  max-width:60ch;
+}
+
+/* ---------- Demo video ---------- */
+.demo .demo-frame{
+  border-radius:var(--pf-radius);
+  box-shadow:0 12px 40px rgba(0,0,0,.45);
+}
+.demo .demo-lead{font-size:.95rem;margin-bottom:var(--space-4);max-width:62ch}
+.demo .demo-sub{color:var(--mute);font-size:.875rem;margin-top:var(--space-3)}
+
+/* ---------- Try: centrepiece ---------- */
+.card.try{
+  border-color:rgba(255,210,122,.32);
+  background:
+    radial-gradient(700px 260px at 100% 0%,rgba(255,210,122,.07),transparent 60%),
+    var(--pf-panel);
+}
+
+/* Three-step strip */
+.try .steps{
+  list-style:none;
+  counter-reset:pf-step;
+  padding:0;
+  margin:var(--space-3) 0 var(--space-4);
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-3);
+}
+.try .steps li{
+  counter-increment:pf-step;
+  position:relative;
+  display:grid;
+  grid-template-columns:32px minmax(0,1fr);
+  gap:var(--space-3);
+  align-items:start;
+  padding:var(--space-3);
+  border:1px solid var(--line);
+  border-radius:var(--pf-radius);
+  background:rgba(6,8,16,.55);
+  font-size:.95rem;
+  line-height:1.4;
+}
+.try .steps li::before{
+  content:counter(pf-step);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:1px solid var(--chain);
+  background:var(--chain-dim);
+  color:var(--ink);
+  font-family:var(--mono);
+  font-weight:500;
+  font-size:.9rem;
+}
+@media (min-width:720px){
+  .try .steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .try .steps li:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    top:28px;
+    right:calc(-1 * var(--space-3));
+    width:var(--space-3);
+    height:1px;
+    background:var(--line);
+  }
+}
+
+/* Wallet status pill */
+#wallet-status{
+  display:inline-flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:var(--space-2);
+  min-height:var(--hit);
+  padding:var(--space-2) var(--space-4);
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(6,8,16,.6);
+  font-size:.95rem;
+  font-weight:500;
+  max-width:100%;
+}
+#wallet-status .status-sep{display:none}
+#wallet-status .status-name{
+  font-family:var(--label);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+#wallet-status .status-value{font-family:var(--mono);font-size:.9rem}
+#wallet-status[data-state="success"]{border-color:rgba(98,217,160,.6);color:var(--ok)}
+#wallet-status[data-state="success"] .status-value{color:var(--ink)}
+#wallet-status[data-state="loading"]{border-color:rgba(255,210,122,.6);color:var(--hold)}
+#wallet-status[data-state="empty"] .status-icon{color:var(--mute)}
+
+/* Wallet buttons: connect is the one primary action */
+.connect-cluster{gap:var(--space-3);margin-top:var(--space-3)}
+#connect-btn{
+  background:var(--chain);
+  border-color:var(--chain);
+  color:var(--pf-chain-ink);
+  font-weight:600;
+  padding:var(--space-2) var(--space-5);
+}
+#connect-btn:active,#connect-btn.is-pressed{background:#A6C9FF;border-color:#A6C9FF}
+#disconnect-btn .acct{font-family:var(--mono);font-size:.875rem;color:var(--mute)}
+#create-wallet{background:transparent}
+.connect-cluster .web-hint{color:var(--mute);font-size:.875rem;flex:1 1 100%}
+@media (min-width:720px){
+  .connect-cluster .web-hint{flex:1 1 14rem}
+}
+
+#wallet-error,#gas-lock{
+  border-left:3px solid var(--deny);
+  padding-left:var(--space-3);
+}
+.try .hold-status{
+  margin-top:var(--space-5);
+  color:var(--mute);
+  font-size:.875rem;
+  font-family:var(--mono);
+}
+
+/* Four attacks: 2x2 grid of cards */
+.attack-list{
+  counter-reset:pf-attack;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-3);
+  margin-top:var(--space-3);
+}
+@media (min-width:640px){
+  .attack-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+.attack{
+  counter-increment:pf-attack;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  grid-template-areas:
+    "num  title"
+    "see  see";
+  gap:var(--space-2) var(--space-3);
+  align-items:start;
+  padding:var(--space-4);
+  border:1px solid var(--line);
+  border-radius:var(--pf-radius);
+  background:var(--pf-raise);
+  transition:border-color var(--pf-motion) linear,background-color var(--pf-motion) linear;
+}
+.attack::before{
+  content:counter(pf-attack,decimal-leading-zero);
+  grid-area:num;
+  font-family:var(--mono);
+  font-weight:500;
+  font-size:.875rem;
+  color:var(--hold);
+  border:1px solid rgba(255,210,122,.45);
+  border-radius:999px;
+  padding:2px 10px;
+  margin-top:10px;
+}
+.attack:focus-within{border-color:var(--chain)}
+@media (hover:hover){
+  .attack:hover{border-color:rgba(160,180,255,.42);background:rgba(18,23,42,.95)}
+}
+
+/* The existing button is the card's title and its action */
+.attack .btn{
+  grid-area:title;
+  width:100%;
+  justify-content:space-between;
+  text-align:left;
+  font-family:var(--wm);
+  font-weight:600;
+  font-size:1.0625rem;
+  line-height:1.3;
+  padding:var(--space-2) var(--space-3);
+  border-color:rgba(127,178,255,.35);
+  background:rgba(127,178,255,.07);
+}
+.attack .btn::after{
+  content:"";
+  flex:none;
+  width:9px;
+  height:9px;
+  margin:0 6px 0 10px;
+  border-top:2px solid var(--chain);
+  border-right:2px solid var(--chain);
+  transform:rotate(45deg);
+}
+.attack .btn:disabled{opacity:.5;cursor:not-allowed}
+.attack .btn:disabled::after{opacity:.6}
+
+/* Expected result: quiet line with a shield glyph (sentence cannot be split without scripts) */
+.attack .see{
+  grid-area:see;
+  position:relative;
+  padding:var(--space-2) var(--space-3) var(--space-2) calc(var(--space-3) + 22px);
+  border-radius:var(--radius-sm);
+  background:rgba(255,158,107,.06);
+  border:1px solid rgba(255,158,107,.22);
+  color:#C9CEDC;
+  font-size:.875rem;
+  line-height:1.45;
+}
+.attack .see::before{
+  content:"";
+  position:absolute;
+  left:var(--space-3);
+  top:calc(var(--space-2) + 2px);
+  width:16px;
+  height:16px;
+  background:var(--deny);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 5.5 6.2v5.3c0 3.6 2.7 6.2 6.5 7.5 3.8-1.3 6.5-3.9 6.5-7.5V6.2L12 3.5z'/%3E%3Cpath d='M9 12l2 2 4-4' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'%3E%3Cpath d='M12 3.5 5.5 6.2v5.3c0 3.6 2.7 6.2 6.5 7.5 3.8-1.3 6.5-3.9 6.5-7.5V6.2L12 3.5z'/%3E%3Cpath d='M9 12l2 2 4-4' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* Results written by try.js, directly under the grid */
+.result-list{margin-top:var(--space-4);gap:var(--space-3)}
+.result-list:empty{display:none}
+.result-card{
+  border-radius:var(--pf-radius);
+  padding:var(--space-4);
+  background:var(--pf-raise);
+  border-left-width:4px;
+}
+.result-card p{margin-top:var(--space-2)}
+.result-card .result-attack{
+  margin-top:0;
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:.8125rem;
+  color:var(--hold);
+  border:1px solid rgba(255,210,122,.45);
+  border-radius:999px;
+  padding:2px 10px;
+}
+.result-card .verdict-line{font-family:var(--wm);font-size:1.0625rem;margin-top:var(--space-2)}
+.result-card .result-reason .mono,
+.result-card .result-raw .mono{
+  background:rgba(127,178,255,.1);
+  border-radius:6px;
+  padding:1px 6px;
+}
+.result-card .result-meta{color:var(--mute);font-size:.875rem}
+.result-card .result-meta .acct{font-family:var(--mono)}
+.result-card .hit{min-height:var(--hit);padding:var(--space-1) var(--space-3)}
+#cg-state-card{box-shadow:0 0 0 1px rgba(127,178,255,.25),0 8px 28px rgba(0,0,0,.35)}
+
+/* Details and limits: quiet text toggle */
+details.limits{margin-top:var(--space-5)}
+details.limits > summary{
+  display:inline-flex;
+  gap:var(--space-2);
+  border:0;
+  background:none;
+  padding:0 var(--space-1);
+  color:var(--mute);
+  font-size:.9375rem;
+  text-decoration:underline;
+  text-decoration-color:rgba(141,148,170,.5);
+  text-underline-offset:4px;
+  transition:color var(--pf-motion) linear;
+}
+details.limits > summary::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:rotate(-45deg);
+  transition:transform var(--pf-motion) linear;
+}
+details.limits[open] > summary::before{transform:rotate(45deg)}
+@media (hover:hover){
+  details.limits > summary:hover{color:var(--ink)}
+}
+details.limits .limits-body{
+  border-left:1px solid var(--line);
+  padding-left:var(--space-4);
+}
+details.limits .forged{margin-top:0}
+
+/* ---------- Cost callout ---------- */
+#cost .note{margin-top:var(--space-2)}
+#cost-line{
+  margin-top:var(--space-3);
+  padding:var(--space-4);
+  border:1px solid rgba(127,178,255,.3);
+  border-radius:var(--pf-radius);
+  background:rgba(127,178,255,.06);
+  color:var(--ink);
+}
+#cost-line:empty{display:none}
+#cost-line[data-x]::before{
+  content:attr(data-x) " NEAR";
+  display:block;
+  font-family:var(--mono);
+  font-weight:500;
+  font-size:1.75rem;
+  line-height:1.2;
+  color:var(--chain);
+  margin-bottom:var(--space-1);
+}
+.faucet-block{margin-top:var(--space-3)}
+.mainnet-line{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:.875rem;
+  color:var(--mute);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:2px 12px;
+}
+
+/* ---------- Verify: hash cards and transactions ---------- */
+.hash-card{border-radius:var(--pf-radius)}
+.badge{border-radius:999px;font-size:.95rem}
+
+#tx-table a,.hash-card a{
+  color:var(--chain);
+  text-decoration:underline;
+  text-decoration-color:rgba(127,178,255,.35);
+  text-underline-offset:3px;
+}
+#tx-table a.hit{
+  min-height:var(--hit);
+  justify-content:flex-start;
+  border-color:transparent;
+  background:none;
+  padding:0 var(--space-1);
+  font-family:var(--mono);
+  font-size:var(--type-helper);
+}
+@media (hover:hover){
+  #tx-table a:hover{text-decoration-color:var(--chain)}
+}
+
+/* verdict chips: colour plus the word app.js writes */
+#tx-table :not(td).verdict{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border:1px solid currentColor;
+  border-radius:999px;
+  padding:2px 10px;
+  font-size:.8125rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+#tx-table :not(td).verdict::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:currentColor;
+}
+#tx-table td.verdict{font-weight:600}
+
+/* Phones and tablets: style.css cards stay (no horizontal scroll) */
+#tx-scroll{max-width:100%;overflow-x:hidden}
+
+/* Wide screens: a real table, own scroll container, sticky header */
+@media (min-width:900px){
+  #tx-scroll{
+    overflow:auto;
+    max-height:75vh;
+    border:1px solid var(--line);
+    border-radius:var(--pf-radius);
+  }
+  #tx-table{display:table;width:100%;border-collapse:separate;border-spacing:0}
+  #tx-table thead{
+    display:table-header-group;
+    position:static;
+    width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal;
+  }
+  #tx-table tbody{display:table-row-group}
+  #tx-table tr{display:table-row;border:0;padding:0;margin:0;background:none}
+  #tx-table th,#tx-table td{
+    display:table-cell;
+    width:auto;
+    padding:var(--space-3);
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  #tx-table td::before{content:none}
+  #tx-table th{
+    position:sticky;
+    top:0;
+    z-index:1;
+    background:#0B0E1B;
+    font-size:12px;
+  }
+  #tx-table tbody tr:nth-child(even) td{background:rgba(127,178,255,.03)}
+  #tx-table tbody tr:last-child td{border-bottom:0}
+}
+
+/* ---------- Motion + focus ---------- */
+.btn,.hit,.lang-btn,.vf-nav-link{transition-duration:var(--pf-motion)}
+:focus-visible{outline:2px solid var(--chain);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+
+/* brand mark: the same logo and wordmark as the console pages */
+.brand{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;row-gap:0;align-items:center;align-content:center}
+.brand > img{grid-row:1 / span 2;display:block;width:32px;height:32px}
+.brand .name{font-family:var(--label);font-weight:400;font-size:1rem;letter-spacing:.01em;line-height:1.3;min-height:0;min-width:0}
+.brand .tag{font-size:.75rem;line-height:1.3}
+
+/* current page marker in the top menu */
+.vf-nav-link[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--chain)}
+
+/* T8 wallet notice and no-wallet path */
+.no-wallet{margin:8px 0 12px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;color:var(--mute);word-break:keep-all;overflow-wrap:anywhere}
+.no-wallet a.hit{display:inline-flex;align-items:center;min-height:44px;color:var(--chain);text-decoration:underline}
+.wallet-notice{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:100000001;box-sizing:border-box;width:min(560px,calc(100vw - 24px));padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:#0b0e1c;color:var(--ink);box-shadow:0 8px 32px rgba(0,0,0,.5);word-break:keep-all;overflow-wrap:anywhere}
+.wallet-notice[data-kind="loading"]{pointer-events:none}
+.wallet-notice p{margin:0 0 4px}
+.wallet-notice p.sub{color:var(--mute)}
+.wallet-notice .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.wallet-notice .btn{min-height:44px}

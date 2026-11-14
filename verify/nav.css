@@ -1,0 +1,64 @@
+/* Verify page top menu. Adapted from the home nav rules. */
+
+.vf-sr{
+  position:absolute;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  padding:0;
+  overflow:hidden;
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
+.vf-top{
+  word-break:keep-all;
+  overflow-wrap:anywhere;
+  flex-wrap:wrap;
+  row-gap:var(--space-2);
+}
+
+.vf-brand{
+  display:block;
+  min-width:0;
+  min-height:var(--hit);
+  color:inherit;
+  text-decoration:none;
+  border-radius:var(--radius-sm);
+}
+
+.vf-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-2);
+  order:3;
+  flex-basis:100%;
+}
+
+.vf-nav-link{
+  display:inline-flex;
+  align-items:center;
+  min-height:var(--hit);
+  min-width:var(--hit);
+  padding:0 var(--space-3);
+  border-radius:var(--radius-sm);
+  color:var(--ink);
+  text-decoration:none;
+  font-family:var(--wm);
+  font-size:15px;
+  transition:background-color var(--press-ms, var(--motion-press, 120ms)) linear,transform var(--press-ms, var(--motion-press, 120ms)) linear;
+}
+
+.vf-nav-link:active{
+  background:var(--press);
+  transform:scale(.98);
+}
+
+@media (hover:hover){
+  .vf-nav-link:hover{background:var(--chain-dim)}
+}
+
+@media (min-width:720px){
+  .vf-nav{order:0;flex-basis:auto;margin-left:auto}
+}

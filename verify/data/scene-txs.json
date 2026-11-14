@@ -1,0 +1,325 @@
+{
+  "title": "ChopGate scene transactions (recorded copy)",
+  "recorded_at": "2026-11-14T02:17:00+09:00",
+  "source": "Public archival RPC EXPERIMENTAL_tx_status, wait_until FINAL, archival-rpc.testnet.near.org. Fields below are parsed from execution status, EVENT_JSON logs, Transfer receipts (excluding system gas refunds), and (for JEV mode on refused calls) the judge_report.mode argument string. No private keys are included.",
+  "rpc": {
+    "archival": "https://archival-rpc.testnet.near.org",
+    "method": "EXPERIMENTAL_tx_status",
+    "view_account": "query request_type=view_account finality=final"
+  },
+  "explorer_tx": "https://testnet.nearblocks.io/txns/",
+  "selection": "Ten rows: the original seven scene transactions (Run A two paid scenes on gater2, and Run B five scene steps on gatej2) plus the three Run A scene 3 refusals. The archival RPC lookup uses sender_account_id equal to the transaction signer. The three scene 3 transactions were signed by cg-tn1-attacker-0626733e.testnet, not by the agent account. Setup transactions and further refusals are documented in docs/TESTNET-RPC-CHECK.md.",
+  "contracts": [
+    {
+      "run": "A",
+      "account": "gater2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "role": "Deterministic rules only; no live judge.",
+      "wasm_bytes": 538072,
+      "wasm_sha256": "14da3c88d9034b87d429554513b5289c4303ffaf21a06123491bcd85dc971771",
+      "code_hash_base58": "2QQAUeG61PtyTKLFLXMScNELTWh9b6oWMJ6B2uCQDsD2",
+      "code_hash_note": "NEAR code_hash is the wasm sha256 encoded as base58. The values above are as recorded in docs/TESTNET-RPC-CHECK.md (view_code at finality final). No rebuild record in the repository ties this wasm to a source commit, so Run A shows the behaviour of the deployed wasm only.",
+      "agent": "agentr2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "payee": "payeer2.cg-tn1-a3r-e8a6d1a3.testnet"
+    },
+    {
+      "run": "B",
+      "account": "gatej2.cg-tn1-jev-9da8c302.testnet",
+      "role": "Live JEV judge plus the same deterministic rules.",
+      "wasm_bytes": 537066,
+      "wasm_sha256": "6e20ac13c62f77ecec9b6adbc48bf6cb52d818f9251ac797fc6581a0b18c1c1e",
+      "code_hash_base58": "8Qtk3jf4RLpfiB7PeXeuPGYcp4USV2yeN5Zn3d5NpAMj",
+      "code_hash_note": "NEAR code_hash is the wasm sha256 encoded as base58. The values above are as recorded in docs/TESTNET-RPC-CHECK.md and match a rebuild of the contract source in the repository (commands in the README). This is not the same on-chain code as Run A.",
+      "agent": "agentj2.cg-tn1-jev-9da8c302.testnet",
+      "payee": "payeej2.cg-tn1-jev-9da8c302.testnet"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "A1",
+      "run": "A",
+      "scene": "1",
+      "step": "normal payment",
+      "hash": "YMhtFDUFTPuG3FSBFAnBsGevJuNs3yaz7dU8VmVdF7H",
+      "signer": "agentr2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "contract": "gater2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "method_name": "authorize_and_pay_tiered",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "allow",
+      "reason_code": "allowed",
+      "payout_yocto": "10000000000000000000000",
+      "payout_near": "0.01",
+      "payee": "payeer2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "jev": {
+        "present": false,
+        "mode": "none",
+        "detail": "Deterministic rules only. Event mode=none, report_authenticated=false."
+      },
+      "events": [
+        "tier2_decision",
+        "payout",
+        "decision",
+        "payout_settled"
+      ]
+    },
+    {
+      "id": "A3a",
+      "run": "A",
+      "scene": "3",
+      "step": "owner impersonation (attacker signs with its own key)",
+      "hash": "9HmBVt44uCfnyQhekGCamYiBZQWMY2GxVWrim2GPG8jY",
+      "signer": "cg-tn1-attacker-0626733e.testnet",
+      "contract": "gater2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "method_name": "register",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "block",
+      "reason_code": "owner_impersonation",
+      "payout_yocto": "0",
+      "payout_near": "0",
+      "payee": null,
+      "jev": {
+        "present": false,
+        "mode": "none",
+        "detail": "Deterministic rules only. No judge call."
+      },
+      "events": [
+        "decision"
+      ]
+    },
+    {
+      "id": "A3b",
+      "run": "A",
+      "scene": "3",
+      "step": "owner impersonation (forged signature)",
+      "hash": "CKRvg2yXeQcDJXEWf6CGRuEE6YJrCB4bWsVCNukmrhx",
+      "signer": "cg-tn1-attacker-0626733e.testnet",
+      "contract": "gater2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "method_name": "register",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "block",
+      "reason_code": "invalid_signature",
+      "payout_yocto": "0",
+      "payout_near": "0",
+      "payee": null,
+      "jev": {
+        "present": false,
+        "mode": "none",
+        "detail": "Deterministic rules only. No judge call."
+      },
+      "events": [
+        "decision"
+      ]
+    },
+    {
+      "id": "A3c",
+      "run": "A",
+      "scene": "3",
+      "step": "wrong caller",
+      "hash": "BSeUm4GYryFsrAyRMnRXL2rjwSyty5BzcDK4bsKG4W4o",
+      "signer": "cg-tn1-attacker-0626733e.testnet",
+      "contract": "gater2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "method_name": "authorize_and_pay_tiered",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "block",
+      "reason_code": "wrong_caller",
+      "payout_yocto": "0",
+      "payout_near": "0",
+      "payee": null,
+      "jev": {
+        "present": false,
+        "mode": "none",
+        "detail": "Deterministic rules only. No judge call."
+      },
+      "events": [
+        "decision"
+      ]
+    },
+    {
+      "id": "A5",
+      "run": "A",
+      "scene": "5",
+      "step": "owner approval after a failed other-key approval",
+      "hash": "3snsdMbuhZXbbZmtLPpUPozQ8MqCRWJLBk8Jz1DfrDeN",
+      "signer": "agentr2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "contract": "gater2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "method_name": "approve_pending",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "approved",
+      "reason_code": "payout_settled",
+      "payout_yocto": "80000000000000000000000",
+      "payout_near": "0.08",
+      "payee": "payeer2.cg-tn1-a3r-e8a6d1a3.testnet",
+      "jev": {
+        "present": false,
+        "mode": "none",
+        "detail": "Deterministic rules only. Owner approval is a pending-signature check, not a judge call."
+      },
+      "events": [
+        "pending_approved",
+        "payout",
+        "payout_settled"
+      ],
+      "related": [
+        {
+          "role": "hold",
+          "hash": "Fn43pxJbw8YpiAwSEKkDbFrTM9fEATPuFx1CVJpdCgnm",
+          "reason_code": "tier2_escalate"
+        },
+        {
+          "role": "failed other-key approval",
+          "hash": "Be1EYYjXWe1Hz4TSpTRy9ZACrMsRznQEen9JZx7QHCzn",
+          "reason_code": "invalid pending signature"
+        }
+      ]
+    },
+    {
+      "id": "B1",
+      "run": "B",
+      "scene": "1",
+      "step": "normal payment with live JEV report",
+      "hash": "5jKyD4pijamkUG1S5rT1ZjeiLiX9LXC2tY6DXpCPMFCv",
+      "signer": "agentj2.cg-tn1-jev-9da8c302.testnet",
+      "contract": "gatej2.cg-tn1-jev-9da8c302.testnet",
+      "method_name": "authorize_and_pay_dual",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "allow",
+      "reason_code": "allowed",
+      "payout_yocto": "10000000000000000000000",
+      "payout_near": "0.01",
+      "payee": "payeej2.cg-tn1-jev-9da8c302.testnet",
+      "jev": {
+        "present": true,
+        "mode": "jev-live",
+        "model": "jev-1.14.0",
+        "p_yes": "0.98",
+        "request_id": "req_01a1ce75c551767195dd2e0252c6da17",
+        "report_authenticated": true,
+        "source_q_permille": 980,
+        "verdict": "pass"
+      },
+      "events": [
+        "tier2_decision",
+        "payout",
+        "decision",
+        "payout_settled"
+      ]
+    },
+    {
+      "id": "B4",
+      "run": "B",
+      "scene": "4",
+      "step": "over the 0.01 NEAR entry limit",
+      "hash": "7Tcypc346TsBRvncodHiX74rWp7CJ83366Gu4jJNK7ux",
+      "signer": "agentj2.cg-tn1-jev-9da8c302.testnet",
+      "contract": "gatej2.cg-tn1-jev-9da8c302.testnet",
+      "method_name": "authorize_and_pay_dual",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "block",
+      "reason_code": "entry_limit_exceeded",
+      "payout_yocto": "0",
+      "payout_near": "0",
+      "payee": "payeej2.cg-tn1-jev-9da8c302.testnet",
+      "jev": {
+        "present": true,
+        "mode": "jev-live",
+        "model": "jev-1.14.0",
+        "p_yes": "0.06",
+        "request_id": "req_01a1ce7647517e2db7d933378523ee86",
+        "report_authenticated": null,
+        "note": "No tier2_decision event: the contract refused with entry_limit_exceeded before a judge event. JEV fields below come from the judge_report.mode argument recorded on this transaction."
+      },
+      "events": [
+        "decision"
+      ]
+    },
+    {
+      "id": "B5h",
+      "run": "B",
+      "scene": "5",
+      "step": "amount above the 0.05 NEAR review amount (held)",
+      "hash": "Bbtz2nUBy5EumKyFLm3tEejucmJvoPLdrFoSBUxrmPkc",
+      "signer": "agentj2.cg-tn1-jev-9da8c302.testnet",
+      "contract": "gatej2.cg-tn1-jev-9da8c302.testnet",
+      "method_name": "authorize_and_pay_dual",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "block",
+      "reason_code": "tier2_escalate",
+      "payout_yocto": "0",
+      "payout_near": "0",
+      "payee": "payeej2.cg-tn1-jev-9da8c302.testnet",
+      "jev": {
+        "present": true,
+        "mode": "jev-live",
+        "model": "jev-1.14.0",
+        "p_yes": "0.98",
+        "request_id": "req_01a1ce7680cb763f9dd70317e72567c4",
+        "report_authenticated": true,
+        "source_q_permille": 980,
+        "verdict": "escalate",
+        "lock": "2c"
+      },
+      "events": [
+        "tier2_decision",
+        "pending_created",
+        "decision"
+      ]
+    },
+    {
+      "id": "B5f",
+      "run": "B",
+      "scene": "5",
+      "step": "approval signed by another key",
+      "hash": "6pxdFLzkgh1ckJHvBTpBq8CaeoYbuWqAKdBHcdWTGQaa",
+      "signer": "agentj2.cg-tn1-jev-9da8c302.testnet",
+      "contract": "gatej2.cg-tn1-jev-9da8c302.testnet",
+      "method_name": "approve_pending",
+      "finality": "FINAL",
+      "outcome": "Failure",
+      "verdict": "fail",
+      "reason_code": "invalid pending signature",
+      "payout_yocto": "0",
+      "payout_near": "0",
+      "payee": null,
+      "jev": {
+        "present": false,
+        "mode": "none",
+        "detail": "This call checks the pending-approval signature. It does not invoke the judge."
+      },
+      "events": []
+    },
+    {
+      "id": "B5a",
+      "run": "B",
+      "scene": "5",
+      "step": "owner approval",
+      "hash": "6gTqLx9oVTyE2287kDbyZweHDrqEq3TwuyKKKpd9bmEw",
+      "signer": "agentj2.cg-tn1-jev-9da8c302.testnet",
+      "contract": "gatej2.cg-tn1-jev-9da8c302.testnet",
+      "method_name": "approve_pending",
+      "finality": "FINAL",
+      "outcome": "SuccessValue",
+      "verdict": "approved",
+      "reason_code": "payout_settled",
+      "payout_yocto": "80000000000000000000000",
+      "payout_near": "0.08",
+      "payee": "payeej2.cg-tn1-jev-9da8c302.testnet",
+      "jev": {
+        "present": false,
+        "mode": "none",
+        "detail": "Owner approval is a pending-signature check, not a judge call. The hold it approves is B5h, which carried the live JEV report."
+      },
+      "events": [
+        "pending_approved",
+        "payout",
+        "payout_settled"
+      ]
+    }
+  ]
+}

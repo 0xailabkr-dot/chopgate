@@ -1,0 +1,36 @@
+Self-hosted fonts in this folder
+
+These files were copied from fonts already present on the build machine. Nothing was downloaded to obtain them.
+
+1) Sora-VariableFont_wght.ttf
+   Font: Sora (variable weight)
+   Copyright: Copyright 2019 The Sora Project Authors (https://github.com/sora-xor/sora-font)
+   sha256: 46fee4d09354bc092ae968cf65ad21ef68cdc66a364e2f113d4c2b3f7c59a9a6
+
+2) Michroma-Regular.ttf
+   Font: Michroma
+   Copyright: Copyright 2011 The Michroma Project Authors (https://github.com/googlefonts/Michroma-font)
+   sha256: aeb90da44b9f39fd7df446507f4109a39e0b8ffcad76ad428a0f737e9860e3ec
+
+3) IBMPlexSans-VariableFont_wdth,wght.ttf
+   Font: IBM Plex Sans (variable width and weight)
+   Copyright: Copyright 2019 IBM Corp. All rights reserved.
+   sha256: 6e8034d686da3e4631e0f367303b40e2e0608d6aafd39fb3c6c58aa7ddf5d40a
+
+4) IBMPlexMono-Regular.ttf
+   Font: IBM Plex Mono Regular
+   Copyright: Copyright 2019 IBM Corp. All rights reserved.
+   sha256: ab08018ccd276b79fb2c636bb95b9c543598f9d50505fe92506fcb4dae7810cd
+
+5) IBMPlexMono-Medium.ttf
+   Font: IBM Plex Mono Medium
+   Copyright: Copyright 2019 IBM Corp. All rights reserved.
+   sha256: 8ae925744d53758b67a77ea35c2fc46d7b688c7d8c04da3b579902bed0ca0e17
+
+License
+  SIL Open Font License, Version 1.1 (see OFL.txt).
+  License URL recorded in the font name tables: http://scripts.sil.org/OFL
+
+Korean text
+  IBM Plex Sans KR is not bundled here (it was not available on the machine used to assemble this folder).
+  The page does not load Google Fonts. Korean glyphs use the browser's system Korean font (for example Apple SD Gothic Neo or Noto Sans KR) after the bundled IBM Plex Sans family.
