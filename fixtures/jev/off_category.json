@@ -1,0 +1,8 @@
+{
+  "mode": "mock",
+  "source_label": "owner_signed",
+  "source_q_permille": 960,
+  "category": "gambling",
+  "category_q_permille": 950,
+  "note": "Outside allowed categories"
+}

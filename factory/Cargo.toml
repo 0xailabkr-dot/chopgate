@@ -1,0 +1,50 @@
+[package]
+name = "chopgate_factory"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "chopgate_factory"
+crate-type = ["cdylib", "rlib"]
+
+# Both features are off by default. `build.sh` does not pass them.
+# The deploy wasm is the no-feature build. Test wasms live in out-test/.
+[features]
+default = []
+# Embed tests/fixtures/gate_new_unreachable.wasm instead of res/chopgate.wasm.
+test-gate-double = []
+# refund_or_next reports attempts 1..=TEST_FORCE_SHORT_K short.
+test-force-retry = []
+
+[dependencies]
+near-sdk = { version = "=5.24.1", features = ["global-contracts"] }
+
+[dev-dependencies]
+near-sdk = { version = "=5.24.1", features = ["unit-testing"] }
+near-workspaces = "=0.22.1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+serde_json = "1"
+anyhow = "1"
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+rand = "0.8"
+bs58 = "0.5"
+hex = "0.4"
+sha2 = "0.10"
+# Public tree: use the gate crate at the repository root. Do not vendor a second copy.
+chopgate = { path = ".." }
+
+[profile.dev]
+debug = 0
+incremental = false
+
+[profile.test]
+debug = 0
+incremental = false
+
+[profile.release]
+codegen-units = 1
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = true

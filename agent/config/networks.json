@@ -1,0 +1,24 @@
+{
+  "testnet": {
+    "enabled": true,
+    "networkId": "testnet",
+    "rpc": [
+      "https://test.rpc.fastnear.com",
+      "https://rpc.testnet.near.org"
+    ],
+    "archivalRpc": [
+      "https://archival-rpc.testnet.fastnear.com",
+      "https://archival-rpc.testnet.near.org"
+    ],
+    "txIndexApi": "https://tx.test.fastnear.com/v0/account",
+    "explorer": "https://testnet.nearblocks.io/txns/"
+  },
+  "mainnet": {
+    "enabled": false,
+    "networkId": "",
+    "rpc": "",
+    "archivalRpc": "",
+    "txIndexApi": "",
+    "explorer": ""
+  }
+}

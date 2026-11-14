@@ -1,0 +1,7 @@
+{
+  "request": {"action":"transfer","target":"actual.near","amount":"1234567890123456789012345","serial":9,"instruction_hash":"signed-content"},
+  "description":"안전한 구독 0.01 NEAR → trusted.near",
+  "alias":"믿어도 되는 호출자 설명",
+  "report":{"source_label":"owner_signed","source_q_permille":899,"category_q_permille":970,"category":"subscription","instruction_hash":"signed-content"},
+  "statuses":{"pending_approved":"승인","pending_rejected":"거절","pending_expired":"시간초과","decision":"서명 안 됨"}
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>ChopGate — try to break a payment gate on NEAR testnet</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./nav.css">
+  <link rel="stylesheet" href="./proof.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top vf-top">
+      <a class="brand vf-brand" href="../">
+        <img src="../assets/img/logo-mark.svg" width="32" height="32" alt="">
+        <div class="name" data-i18n="brand">ChopGate</div>
+        <div class="tag" data-i18n="tag">NEAR testnet prototype</div>
+      </a>
+      <nav class="vf-nav" aria-labelledby="vf-nav-label">
+        <span class="vf-sr" id="vf-nav-label" data-i18n="navLabel">Main</span>
+        <a class="vf-nav-link" href="../console/" data-i18n="navConsole">Console</a>
+        <a class="vf-nav-link" href="../agent/" data-i18n="navAgent">Agent</a>
+        <a class="vf-nav-link" href="../tour/" data-i18n="navTour">Tour</a>
+        <a class="vf-nav-link" href="./" data-i18n="navProof" aria-current="page">Proof</a>
+      </nav>
+      <button type="button" class="lang-btn" id="lang-btn" aria-label="Switch to Korean">한국어</button>
+    </header>
+
+    <main class="stack">
+      <section class="card" id="explain">
+        <div class="kicker" data-i18n="explainLabel">How a payment moves</div>
+        <h2 id="explain-title" data-i18n="explainTitle">A gate between your AI agent and your money.</h2>
+        <div class="scene" id="scene" tabindex="0" data-play="on" data-scene-final="5" aria-labelledby="explain-title">
+          <p class="status-line" id="scene-status"></p>
+          <p class="scene-sentence" id="scene-sentence" aria-live="polite"></p>
+          <ol class="scene-steps" id="scene-steps"></ol>
+        </div>
+        <div class="scene-controls">
+          <button type="button" class="btn" id="scene-prev">Previous</button>
+          <button type="button" class="btn" id="scene-next">Next</button>
+          <button type="button" class="btn" id="scene-pause">Pause</button>
+        </div>
+      </section>
+
+      <h1 class="page-title" data-i18n="pageTitle">Proof you can check yourself</h1>
+      <p class="page-lead" data-i18n="pageLead">Connect a testnet wallet, send four attacks, and watch the gate pay nothing.</p>
+      <section class="card demo" id="demo">
+        <div class="kicker" data-i18n="demoLabel">Demo</div>
+        <h2 data-i18n="demoTitle">A 96-second walkthrough of the local checks and the testnet scenes.</h2>
+        <p class="demo-lead" data-i18n="demoBody"></p>
+        <div class="demo-frame">
+          <video id="demo-video" controls poster="./poster.svg" preload="metadata" playsinline width="1920" height="1080">
+            <source src="./chopgate-demo-b.mp4" type="video/mp4">
+            <track kind="subtitles" src="./chopgate-demo-b.en.vtt" srclang="en" label="English" default id="demo-track">
+          </video>
+        </div>
+        <p class="demo-sub" id="demo-sub" data-i18n="demoSubNote">English subtitles are attached.</p>
+      </section>
+
+      <section class="card" id="problem">
+        <div class="kicker" data-i18n="problemLabel">Problem</div>
+        <h2 data-i18n="problemTitle">An agent with a wallet can be talked into paying.</h2>
+        <p data-i18n="problemBody"></p>
+      </section>
+
+      <section class="card" id="solution">
+        <div class="kicker" data-i18n="solutionLabel">Solution</div>
+        <h2 data-i18n="solutionTitle">ChopGate checks an owner-signed mandate, then pays, refuses, or holds.</h2>
+        <p data-i18n="solutionBody"></p>
+      </section>
+
+      <section class="card try" id="try">
+        <div class="kicker" data-i18n="tryLabel">Try it yourself</div>
+        <h2 id="try-title" data-i18n="tryTitle">Connect a testnet wallet and send four fixed attacks.</h2>
+        <h3 class="kicker kicker-follow" data-i18n="stepsTitle">Before you connect</h3>
+        <ol class="steps">
+          <li data-i18n="step1">Create a wallet.</li>
+          <li data-i18n="stepFund">A new Intear testnet wallet comes with testnet NEAR (2.5 in our test). Each try uses about 0.0003 for gas.</li>
+          <li data-i18n="step3">Connect.</li>
+        </ol>
+        <p class="no-wallet" id="no-wallet">
+          <span data-i18n="noWalletLine">No wallet yet? These need none:</span>
+          <a class="hit" id="no-wallet-tour" href="../tour/" data-i18n="noWalletTour">Tour</a>
+          <a class="hit" id="no-wallet-proof" href="#verify" data-i18n="noWalletProof">Recorded testnet transactions</a>
+        </p>
+        <p class="status-line" id="wallet-status">
+          <span class="status-name" data-i18n="walletName">Wallet</span>
+          <span class="status-sep">:</span>
+          <span class="status-icon" id="wallet-icon"></span>
+          <span class="status-value" id="wallet-value">not connected</span>
+        </p>
+        <div class="connect-cluster" id="wallet-actions">
+          <button type="button" class="btn" id="connect-btn" data-i18n="connectBtn">Connect testnet wallet</button>
+          <button type="button" class="btn" id="disconnect-btn" hidden>
+            <span class="acct" id="disconnect-account"></span>
+            <span data-i18n="disconnectBtn">Disconnect</span>
+          </button>
+          <a class="btn" id="create-wallet" data-i18n="createWallet" href="https://wallet.intear.tech/" target="_blank" rel="noopener noreferrer">Create a testnet wallet (Intear)</a>
+          <p class="web-hint" id="web-hint" data-i18n="webHint">In the Intear window, choose Web.</p>
+          <p class="web-hint" id="intear-wait" data-i18n="intearWait">The Intear window takes about 10 seconds to open.</p>
+        </div>
+        <p class="note" id="wallet-error" hidden></p>
+        <p class="note" id="gas-lock" hidden></p>
+        <p class="hold-status" id="hold-status">Held payments on the gate: …</p>
+        <p class="note" id="attack-preview" hidden></p>
+        <div class="attack-list" id="attack-row">
+          <div class="attack">
+            <button type="button" class="btn" id="attack-1" data-attack="1" data-i18n="attack1" aria-describedby="see-1">Pay with no permission</button>
+            <p class="see" id="see-1" data-i18n="see1">You will see: Refused · unknown_mandate · Paid 0</p>
+          </div>
+          <div class="attack">
+            <button type="button" class="btn" id="attack-2" data-attack="2" data-i18n="attack2" aria-describedby="see-2">Fake the owner's stamp</button>
+            <p class="see" id="see-2" data-i18n="see2">You will see: Refused · owner_impersonation · Paid 0</p>
+          </div>
+          <div class="attack">
+            <button type="button" class="btn" id="attack-3" data-attack="3" data-i18n="attack3" aria-describedby="see-3">Use another agent's permission</button>
+            <p class="see" id="see-3" data-i18n="see3">You will see: Refused · auto_frozen · Paid 0</p>
+          </div>
+          <div class="attack">
+            <button type="button" class="btn" id="attack-4" data-attack="4" data-i18n="attack4" aria-describedby="see-4">Send a fake approval stamp (hold)</button>
+            <p class="see" id="see-4" data-i18n="see4">You will see: Transaction fails · Paid 0</p>
+          </div>
+        </div>
+        <div class="result-list" id="result-list" aria-live="polite"></div>
+        <details class="limits" id="try-details">
+          <summary data-i18n="detailsSummary">Details and limits</summary>
+          <div class="limits-body">
+            <p class="forged" id="forged-note" data-i18n="tryWalletNote">Your wallet signs and sends the transaction. The forged owner signature inside attacks 2 and 4 comes from a throwaway key made in this tab. It is not stored.</p>
+            <p class="note" id="wallet-github" data-i18n="walletGithub"></p>
+            <p class="note" id="cli-note" data-i18n="cliNote">NEAR CLI signs from the command line, not from this selector.</p>
+            <p class="update-slot" id="wallet-update-slot" data-slot="popup-wallet-results" data-i18n="walletUpdate"></p>
+            <p class="fixed-args note" id="fixed-args" data-i18n="fixedArgs"></p>
+            <p class="note" id="decoy-note" data-i18n="decoyNote"></p>
+            <div class="hold-links" id="wrong-caller-link">
+              <a class="hit" id="wrong-caller-anchor" href="https://testnet.nearblocks.io/txns/JBnAvnB9R5SYs9BnGq9ABt69h5GvumaDhwBoWgKLoY6g" target="_blank" rel="noopener noreferrer"><span data-i18n="wrongCallerLink">Recorded wrong_caller</span></a>
+            </div>
+            <p class="note" id="shared-note" data-i18n="sharedNote"></p>
+            <p class="note" id="recorded-holds-label" data-i18n="recordedHoldsLabel">Recorded holds</p>
+            <div class="hold-links" id="hold-links">
+              <a class="hit hash-label" href="https://testnet.nearblocks.io/txns/Bz2AeYTguoAGq4YzCghHKRdt7TT2XBoym9x6GJjk8MYo" target="_blank" rel="noopener noreferrer" title="Bz2AeYTguoAGq4YzCghHKRdt7TT2XBoym9x6GJjk8MYo">Bz2A…8MYo</a>
+              <a class="hit hash-label" href="https://testnet.nearblocks.io/txns/HmM5ereopPwUtUroBbhnwN4rrMRgtE7JLAJKcvtWtEZw" target="_blank" rel="noopener noreferrer" title="HmM5ereopPwUtUroBbhnwN4rrMRgtE7JLAJKcvtWtEZw">HmM5…tEZw</a>
+              <a class="hit hash-label" href="https://testnet.nearblocks.io/txns/8Df3tAZMMm3nSVAPmxhyot7jwNW6n739rySEVfeJnXaL" target="_blank" rel="noopener noreferrer" title="8Df3tAZMMm3nSVAPmxhyot7jwNW6n739rySEVfeJnXaL">8Df3…nXaL</a>
+              <a class="hit hash-label" href="https://testnet.nearblocks.io/txns/5BRvbZWqfD7Ant4ocViiWBSdx4ioQccmkGHsXWdYrwAb" target="_blank" rel="noopener noreferrer" title="5BRvbZWqfD7Ant4ocViiWBSdx4ioQccmkGHsXWdYrwAb">5BRv…rwAb</a>
+            </div>
+            <p class="note gas-note" id="gas-note" data-i18n="gasNote">Each try attaches prepaid gas and spends about 0.0003 testnet NEAR when the wallet sends it. The page keeps the wallet closed when the balance is under 0.003.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="card" id="cost">
+        <div class="kicker" data-i18n="costLabel">Cost</div>
+        <h2 data-i18n="costTitle">What making one gate locks</h2>
+        <p class="note" id="cost-line"></p>
+        <div class="faucet-block" id="faucet-line">
+          <p class="link-row" id="faucet-actions"></p>
+          <p class="note" id="faucet-need"></p>
+          <p class="note" id="faucet-limit" data-i18n="faucetLimit">The faucet page does not show a request limit.</p>
+        </div>
+        <p class="mainnet-line" id="mainnet-line" data-i18n="mainnetLine">Mainnet: not deployed.</p>
+      </section>
+
+      <section class="card" id="verify">
+        <div class="kicker" data-i18n="verifyLabel">Verify</div>
+        <h2 id="verify-title" data-i18n="verifyTitle">Scene transactions, read live from public RPC.</h2>
+        <p data-i18n="verifyBody"></p>
+        <p class="note" id="live-unread" hidden></p>
+
+        <div class="badge-row">
+          <span class="badge status-line" id="source-badge">
+            <span class="status-name" data-i18n="sourceName">Source</span>
+            <span>:</span>
+            <span class="status-icon" id="source-icon"></span>
+            <span id="source-label" data-i18n="sourceLoading">Reading archival RPC…</span>
+          </span>
+        </div>
+
+        <h3 class="kicker kicker-follow" data-i18n="hashCompareTitle">Contract code_hash compared with the repository wasm</h3>
+        <p class="hash-lead" data-i18n="hashCompareLead"></p>
+        <div class="hash-list" id="hash-body"></div>
+
+        <h3 class="kicker kicker-gap" data-i18n="tableTitle">Scene transactions</h3>
+        <div class="scroll" id="tx-scroll">
+          <table id="tx-table">
+            <thead>
+              <tr>
+                <th data-i18n="colScene">Scene</th>
+                <th data-i18n="colHash">Transaction</th>
+                <th data-i18n="colSigner">Signer</th>
+                <th data-i18n="colVerdict">Verdict</th>
+                <th data-i18n="colReason">Reason code / event</th>
+                <th data-i18n="colPayout">Payout</th>
+                <th data-i18n="colJev">JEV</th>
+              </tr>
+            </thead>
+            <tbody id="tx-body"></tbody>
+          </table>
+        </div>
+        <p class="note" id="verify-more" data-i18n="verifyMore"></p>
+        <p class="note" data-i18n="selectionNote"></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="fonts" data-i18n="fontsNote"></p>
+      <p class="limits" data-i18n="footerLimits"></p>
+    </footer>
+  </div>
+  <script src="./app.js" defer></script>
+  <script type="module" src="./c2/try.js"></script>
+</body>
+</html>

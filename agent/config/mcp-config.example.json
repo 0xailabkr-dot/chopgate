@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "chopgate": {
+      "command": "node",
+      "args": ["/absolute/path/to/chopgate/agent/src/mcp-server.mjs"],
+      "env": {
+        "CHOPGATE_AGENT_KEY": "/absolute/path/to/agent-key.json",
+        "CHOPGATE_MANDATES": "/absolute/path/to/mandates",
+        "CHOPGATE_LEDGER": "/absolute/path/to/ledger.jsonl",
+        "CHOPGATE_NETWORK": "testnet"
+      }
+    }
+  }
+}

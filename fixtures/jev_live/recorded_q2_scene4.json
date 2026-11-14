@@ -1,0 +1,19 @@
+{
+  "synthetic": false,
+  "note": "recorded live JEV response (testnet run j2); only model/answers/usage (or detail) and the request id are kept; question v2",
+  "status": 200,
+  "request_id": "req_01a1ce7647517e2db7d933378523ee86",
+  "body": {
+    "model": "jev-1.14.0",
+    "answers": {
+      "pay_automatically": {
+        "type": "noul",
+        "noul": 0.06
+      }
+    },
+    "usage": {
+      "input_tokens": 500,
+      "output_tokens": 25
+    }
+  }
+}

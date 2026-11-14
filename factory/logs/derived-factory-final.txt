@@ -1,0 +1,7 @@
+# derived 2026-11-14 11:10:59 KST: derived numbers for README/NOTES r3, inputs from logs/test-factory-final.log (wasm 04ce9d36) except the two fee-table batch fees, which are the existing README figures (not from a test log).
+s1_parent_create_gate_receipt_gas=33067484809708 (s1_success receipts= first entry, logs/test-factory-final.log)
+unused_at_200_tgas_43char = 85000000000000 - 33067484809708 - 43068263399518 = 8864251790774
+unused_at_200_tgas_44char = 85000000000000 - 33067484809708 - 43068265635452 = 8864249554840
+highest_batch_burn_deploy_wasm = 43837436000513 (s1_success batch_gas and s9 batch_gas; s5 43837417077125, s8 a 43837398153737 / b 43837379230349, s12 43837349611133)
+highest_callback_burn_deploy_wasm = 2476385232565 (s2 and s10 callback receipt, unchanged from the old log)
+note: in logs/test-factory-final.log s8 owner a/b are swapped vs logs/test-factory-prior.log (a: total 79761482610464 batch 43837398153737 callback 2098164725689; b: total 79738671091880 batch 43837379230349 callback 2084484725689)

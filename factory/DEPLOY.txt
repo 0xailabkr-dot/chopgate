@@ -1,0 +1,13 @@
+DEPLOY.txt — written 2026-11-14 11:52:52 KST (testnet only)
+factory account: cg-u1f-fdf59d31.testnet
+factory wasm: out/chopgate_factory.wasm 792018 bytes sha256 04ce9d363f08cca5983a5fb36ef04b21a5b5c75f1d0e568e7e64db8e9fb94fea
+factory code hash on chain: KmMxbye2PkLVWJ7dnjWGepVsccteC6pdJpnde9cCQGZ (matches base58(sha256(wasm)), logs/codehash-mtime-factory-final.log)
+deploy tx: DQbnfbvTcZaFsifdyu72PYVJUEo46C32RrLrkC9NZ2be (FINAL, block 277598104, no init call)
+required_deposit view after deploy: 5495660000000000000000000 yoctoNEAR (5.49566 NEAR)
+Run E gate: g69d4c038440a403cc5ca.cg-u1f-fdf59d31.testnet
+create_gate tx: 6dn5bQFJUe1eLtNSixFmjcSuHu2QjN7KjkrRL3wTtDng (FINAL, block 277598166, signer cg-u1v-1f7640e2.testnet, 200 Tgas, 5.49566 NEAR, event gate_created, gas used 80.1 Tgas)
+gate code hash: 8Qtk3jf4RLpfiB7PeXeuPGYcp4USV2yeN5Zn3d5NpAMj (= res/chopgate.wasm)
+gate access keys: 0 (view_access_key_list, block 277598236)
+gate balance locked: 5495660000000000000000000 yoctoNEAR (block 277598225), storage_usage 537549
+factory access keys: 1 FullAccess (block 277598241) — deletion pending (by 23:00)
+RUNE-DONE the deployed build 2026-11-14 11:52:52 KST

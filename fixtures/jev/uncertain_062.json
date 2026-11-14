@@ -1,0 +1,8 @@
+{
+  "mode": "mock",
+  "source_label": "external_content",
+  "source_q_permille": 620,
+  "category": "subscription",
+  "category_q_permille": 950,
+  "note": "외부 문서에서 나온 지시로 보임 — 확신 62%"
+}

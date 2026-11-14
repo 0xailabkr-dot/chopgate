@@ -1,0 +1,21 @@
+{
+  "synthetic": true,
+  "note": "hand-written fixture for offline unit tests, not a recorded JEV response",
+  "status": 200,
+  "request_id": "synthetic-wt",
+  "body": {
+    "model": "jev-synthetic",
+    "answers": {
+      "pay_automatically": {
+        "type": "choice",
+        "choice": "yes",
+        "confidence": 0.9,
+        "probabilities": {}
+      }
+    },
+    "usage": {
+      "input_tokens": 1,
+      "output_tokens": 1
+    }
+  }
+}

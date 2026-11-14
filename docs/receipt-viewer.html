@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChopGate receipt viewer</title>
+<style>
+body{font:16px system-ui,sans-serif;margin:2rem;background:#f5f7fa;color:#172033}main{max-width:1200px;margin:auto}textarea{box-sizing:border-box;width:100%;height:15rem;font:13px monospace}button{padding:.6rem 1rem;margin:.7rem .5rem .7rem 0;cursor:pointer}section{overflow:auto;background:white;padding:1rem;margin:1rem 0;border:1px solid #ccd3df}.table-scroll{display:block;overflow-x:auto}table{border-collapse:collapse;width:max-content;min-width:100%;table-layout:auto;font-size:13px}th,td{text-align:left;padding:.5rem;border-bottom:1px solid #ddd;vertical-align:top;white-space:nowrap;overflow-wrap:normal;word-break:normal}th{background:#edf1f7}.allow{color:#12652e}.block{color:#b01926}article{border-bottom:1px solid #ddd;padding:.7rem 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}#status{white-space:pre-wrap}
+</style>
+<main>
+<h1>ChopGate receipt viewer</h1>
+<p>Paste one EVENT_JSON: log or bare JSON event envelope per line. Processing stays in this local file. Samples illustrate the schema; they are not measured transaction logs.</p>
+<label for="logs">Contract logs</label><textarea id="logs" spellcheck="false"></textarea>
+<button id="render">Render receipts</button><button id="sample">Load sample</button>
+<p id="status" role="status"></p>
+<section><h2>Decision receipts</h2><div class="table-scroll"><table><thead id="columns"></thead><tbody id="decisions"></tbody></table></div></section>
+<section><h2>Tier 2 / human approval receipts</h2><div id="tiers"></div></section>
+<section><h2>Policy events</h2><p>Version transitions use old_version → new_version. Proposals and rejections show unchanged policy_version.</p><div id="policy"></div></section>
+</main>
+<script>
+'use strict';
+const fields=['serial','verdict','reason_code','reason','action','target','amount','instruction_hash','remaining_budget'];
+const el=id=>document.getElementById(id);
+const cell=(tag,value)=>{const n=document.createElement(tag);n.textContent=String(value??'');return n;};
+const header=document.createElement('tr');fields.forEach(f=>header.append(cell('th',f)));el('columns').append(header);
+function render(){
+ el('decisions').replaceChildren();el('policy').replaceChildren();el('tiers').replaceChildren();let count=0;const errors=[];
+ el('logs').value.split(/\r?\n/).forEach((line,i)=>{
+  if(!line.trim())return;
+  try{
+   const e=JSON.parse(line.trim().replace(/^EVENT_JSON:/,''));
+   if(e.standard!=='chopgate'||e.version!=='1.0.0'||!Array.isArray(e.data))throw Error('Expected chopgate 1.0.0 event envelope');
+   if(!['decision','rule_proposal','policy_update','policy_update_rejected','tier2_decision','pending_created','pending_approved','pending_rejected','pending_expired'].includes(e.event))throw Error('Unsupported event');
+   e.data.forEach(d=>{
+    if(!d||typeof d!=='object'||Array.isArray(d))throw Error('Expected data object');
+    if(e.event==='decision'){
+     const row=document.createElement('tr');if(['allow','block'].includes(d.verdict))row.className=d.verdict;
+     fields.forEach(f=>row.append(cell('td',d[f])));el('decisions').append(row);
+    }else if(['tier2_decision','pending_created','pending_approved','pending_rejected','pending_expired'].includes(e.event)){
+     const panel=document.createElement('article');panel.append(cell('h3',e.event));
+     panel.append(cell('pre',JSON.stringify(d,null,2)));el('tiers').append(panel);
+    }else{
+     const panel=document.createElement('article');panel.append(cell('h3',e.event));
+     const before=e.event==='policy_update'?d.old_version:d.policy_version;
+     const after=e.event==='policy_update'?d.new_version:d.policy_version;
+     panel.append(cell('p',`Version: ${before??'?'} → ${after??'?'}`));
+     panel.append(cell('pre',JSON.stringify(d,null,2)));el('policy').append(panel);
+    }count++;
+   });
+  }catch(error){errors.push(`Line ${i+1}: ${error.message}`);}
+ });
+ el('status').textContent=`${count} event objects rendered.${errors.length?'\n'+errors.join('\n'):''}`;
+}
+const hash='1062256b81699587227a86e63f7777df6005a2a2dca423e0227ff5f2a981196c';
+function decision(serial,verdict,reason_code,action,target,amount,remaining_budget,instruction_hash=hash){return {event:'decision',data:[{serial,verdict,reason_code,reason:reason_code.replaceAll('_',' '),action,target,amount,instruction_hash,remaining_budget}]};}
+const samples=[
+ ...['tier2_decision','pending_created','pending_approved','pending_rejected','pending_expired'].map((event,i)=>({event,data:[event==='tier2_decision'?{tier:2,serial:20,verdict:'escalate',lock:'2c',reasons:['2a_external_content','2a_low_confidence'],source_q_permille:620,category_q_permille:950,threshold:900,mode:'mock',target:'vault.test',amount:'1',source:'owner_chat',escrow_balance:'9'}:{id:i,serial:20,target:'vault.test',amount:'1',deadline:20000000000,decision_time:1000000000,escrow_balance:'9'}]})),
+ decision(1,'allow','allowed','register','','100','100',''),
+ decision(1,'allow','allowed','transfer','vault.test','1','99'),
+ decision(2,'block','unsigned_instruction','transfer','vault.test','1','100','b33edb2d47d517f4211605eaf4b7f989fec21e89e7d4198bd27df0e40a186864'),
+ decision(3,'block','unsigned_instruction','transfer','vault.test','1','100','dcc0a2c51cb4c9d2a5a547cefac704913ab343f2fa0c58dc6fc714cbd76da8b6'),
+ decision(4,'block','owner_impersonation','register','','100','0',''),
+ decision(10,'block','out_of_scope','delete','remote.test','1','100'),
+ decision(10,'block','out_of_scope','delete','remote.test','2','100'),
+ {event:'rule_proposal',data:[{proposal_id:1,reason_code:'out_of_scope',action:'delete',target:'remote.test',count:3,proposed_rule:'deny',policy_version:1,approved:false,revoked:false}]},
+ decision(10,'block','auto_frozen','delete','remote.test','3','100'),
+ {event:'policy_update_rejected',data:[{proposal_id:1,reason_code:'owner_impersonation',policy_version:1}]},
+ {event:'policy_update',data:[{proposal_id:1,old_version:1,new_version:2,change:'approved',rule:{action:'delete',target:'remote.test',effect:'deny'}}]}
+];
+el('render').addEventListener('click',render);
+el('sample').addEventListener('click',()=>{el('logs').value=samples.map(e=>'EVENT_JSON:'+JSON.stringify({standard:'chopgate',version:'1.0.0',...e})).join('\n');render();});
+</script>
+</html>

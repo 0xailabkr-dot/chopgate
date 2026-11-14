@@ -1,0 +1,8 @@
+{
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "model": "jev-latest",
+  "allow_min": 0.90,
+  "tier2_min": 0.50,
+  "timeout_ms": 20000,
+  "call_budget": 10
+}

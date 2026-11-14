@@ -1,0 +1,26 @@
+[package]
+license = "Apache-2.0"
+name = "chopgate"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.86"
+
+[lib]
+name = "chopgate"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+near-sdk = "=5.24.1"
+
+[dev-dependencies]
+near-sdk = { version = "=5.24.1", features = ["unit-testing"] }
+near-workspaces = { version = "=0.22.1", features = ["unstable"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time"] }
+serde_json = "1"
+anyhow = "1"
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+rand = "0.8"
+bs58 = "0.5"
+hex = "0.4"
+sha2 = "0.10"
+reqwest = { version = "0.12", features = ["json"] }

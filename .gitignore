@@ -1,0 +1,12 @@
+target/
+.cargo-home/
+secrets/
+*.env
+*.log
+__pycache__/
+
+# public-tree assembly
+node_modules/
+.sandbox-tmp/
+factory/target/
+agent/node_modules/

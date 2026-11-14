@@ -1,0 +1,8 @@
+{
+  "mode": "mock",
+  "source_label": "external_content",
+  "source_q_permille": 970,
+  "category": "transfer",
+  "category_q_permille": 930,
+  "note": "External page instruction, fixed mock"
+}

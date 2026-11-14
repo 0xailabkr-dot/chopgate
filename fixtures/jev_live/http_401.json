@@ -1,0 +1,9 @@
+{
+  "synthetic": true,
+  "note": "hand-written fixture for offline unit tests, not a recorded JEV response",
+  "status": 401,
+  "request_id": "synthetic-401",
+  "body": {
+    "detail": "Invalid API key"
+  }
+}

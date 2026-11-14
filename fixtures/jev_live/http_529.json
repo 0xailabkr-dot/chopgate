@@ -1,0 +1,9 @@
+{
+  "synthetic": true,
+  "note": "hand-written fixture for offline unit tests, not a recorded JEV response",
+  "status": 529,
+  "request_id": "synthetic-529",
+  "body": {
+    "detail": "Overloaded"
+  }
+}

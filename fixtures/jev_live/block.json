@@ -1,0 +1,19 @@
+{
+  "synthetic": true,
+  "note": "hand-written fixture for offline unit tests, not a recorded JEV response",
+  "status": 200,
+  "request_id": "synthetic-block",
+  "body": {
+    "model": "jev-synthetic",
+    "answers": {
+      "pay_automatically": {
+        "type": "noul",
+        "noul": 0.08
+      }
+    },
+    "usage": {
+      "input_tokens": 150,
+      "output_tokens": 1
+    }
+  }
+}

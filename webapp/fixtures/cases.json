@@ -1,0 +1,1157 @@
+[
+  {
+    "name": "pass",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "pass",
+    "expected_lock": "pass",
+    "expected_reasons": []
+  },
+  {
+    "name": "external",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "external_content",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "deny",
+    "expected_lock": "2a",
+    "expected_reasons": [
+      "2a_external_content"
+    ]
+  },
+  {
+    "name": "uncertain",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "external_content",
+      "source_q_permille": 620,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2a_external_content",
+      "2a_low_confidence"
+    ]
+  },
+  {
+    "name": "hash",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "old",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "deny",
+    "expected_lock": "2a",
+    "expected_reasons": [
+      "2a_hash_mismatch"
+    ]
+  },
+  {
+    "name": "payee",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "other.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "deny",
+    "expected_lock": "2b",
+    "expected_reasons": [
+      "2b_payee_not_allowed"
+    ]
+  },
+  {
+    "name": "tx",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "9",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_per_tx_limit"
+    ]
+  },
+  {
+    "name": "day",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "11",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_per_day_limit"
+    ]
+  },
+  {
+    "name": "time",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 540,
+      "window_end_min": 1080,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_time_window"
+    ]
+  },
+  {
+    "name": "frequency",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 5,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_frequency"
+    ]
+  },
+  {
+    "name": "category",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "gambling",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_category"
+    ]
+  },
+  {
+    "name": "category confidence",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 700,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_low_confidence"
+    ]
+  },
+  {
+    "name": "missing",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": true
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": null,
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "jev_missing",
+      "2b_category_missing"
+    ]
+  },
+  {
+    "name": "unknown",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "unknown",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2a_unknown"
+    ]
+  },
+  {
+    "name": "tier1",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": false,
+      "prior": "pass"
+    },
+    "expected_verdict": "deny",
+    "expected_lock": "2c",
+    "expected_reasons": []
+  },
+  {
+    "name": "strictest",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "9",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "other.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "deny",
+    "expected_lock": "2b",
+    "expected_reasons": [
+      "2b_payee_not_allowed",
+      "2b_per_tx_limit"
+    ]
+  },
+  {
+    "name": "optional report",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": null,
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_category_missing"
+    ]
+  },
+  {
+    "name": "wrap window with timezone",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": -60,
+      "window_start_min": 1380,
+      "window_end_min": 60,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "pass",
+    "expected_lock": "pass",
+    "expected_reasons": []
+  },
+  {
+    "name": "window end excluded",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 60,
+      "window_start_min": 1380,
+      "window_end_min": 60,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_time_window"
+    ]
+  },
+  {
+    "name": "source below threshold",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 899,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2a_low_confidence"
+    ]
+  },
+  {
+    "name": "all confidence at threshold",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 900,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 900,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "pass",
+    "expected_lock": "pass",
+    "expected_reasons": []
+  },
+  {
+    "name": "threshold 600 external confident deny",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 600,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "external_content",
+      "source_q_permille": 620,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "deny",
+    "expected_lock": "2a",
+    "expected_reasons": [
+      "2a_external_content"
+    ]
+  },
+  {
+    "name": "legacy deny tightens",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "deny"
+    },
+    "expected_verdict": "deny",
+    "expected_lock": "2c",
+    "expected_reasons": []
+  },
+  {
+    "name": "source confidence invalid",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "20",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 1001,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "0",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2a_low_confidence"
+    ]
+  },
+  {
+    "name": "day checked addition overflow",
+    "rules": {
+      "rules_nonce": 1,
+      "enabled": true,
+      "per_tx_limit": "10",
+      "per_day_limit": "340282366920938463463374607431768211455",
+      "payees": [
+        {
+          "alias": "구독",
+          "account": "payee.test"
+        }
+      ],
+      "tz_offset_min": 0,
+      "window_start_min": 0,
+      "window_end_min": 0,
+      "max_tx_per_day": 5,
+      "allowed_categories": [
+        "subscription"
+      ],
+      "jev_threshold_permille": 900,
+      "jev_required": false
+    },
+    "request": {
+      "target": "payee.test",
+      "amount": "10",
+      "instruction_hash": "hash"
+    },
+    "report": {
+      "source_label": "owner_signed",
+      "source_q_permille": 970,
+      "instruction_hash": "hash",
+      "category": "subscription",
+      "category_q_permille": 960,
+      "mode": "mock"
+    },
+    "ctx": {
+      "timestamp_ns": 0,
+      "spent": "340282366920938463463374607431768211455",
+      "count": 0,
+      "tier1_passed": true,
+      "prior": "pass"
+    },
+    "expected_verdict": "escalate",
+    "expected_lock": "2c",
+    "expected_reasons": [
+      "2b_per_day_limit"
+    ]
+  }
+]

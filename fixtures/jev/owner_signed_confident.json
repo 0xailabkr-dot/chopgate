@@ -1,0 +1,8 @@
+{
+  "mode": "mock",
+  "source_label": "owner_signed",
+  "source_q_permille": 970,
+  "category": "subscription",
+  "category_q_permille": 960,
+  "note": "Owner instruction, confident mock"
+}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="ChopGate in 96 seconds">
+  <defs>
+    <radialGradient id="g" cx="78%" cy="10%" r="80%">
+      <stop offset="0" stop-color="#16244A"/>
+      <stop offset="1" stop-color="#050816"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <g transform="translate(140 220)" fill="none" stroke="#7FB2FF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 260V40h220v220"/>
+    <path d="M0 40 110 0l110 40"/>
+    <path d="M55 260V90M110 260V90M165 260V90"/>
+    <circle cx="190" cy="210" r="56" fill="#050816" stroke="#FFD27A"/>
+    <path d="M190 178l-26 11v18c0 15 11 26 26 31 15-5 26-16 26-31v-18z" stroke="#FFD27A" stroke-width="7"/>
+  </g>
+  <text x="470" y="320" fill="#EDF0F8" font-family="Sora, 'IBM Plex Sans', Arial, sans-serif" font-size="72" font-weight="600" letter-spacing="-1">ChopGate</text>
+  <text x="470" y="390" fill="#8D94AA" font-family="Sora, 'IBM Plex Sans', Arial, sans-serif" font-size="44">in 96 seconds</text>
+  <g font-family="'IBM Plex Mono', Menlo, monospace" font-size="30" font-weight="500">
+    <rect x="470" y="440" width="140" height="56" rx="28" fill="none" stroke="#62D9A0" stroke-width="2"/>
+    <text x="540" y="478" fill="#62D9A0" text-anchor="middle">Paid</text>
+    <rect x="630" y="440" width="140" height="56" rx="28" fill="none" stroke="#FFD27A" stroke-width="2"/>
+    <text x="700" y="478" fill="#FFD27A" text-anchor="middle">Held</text>
+    <rect x="790" y="440" width="190" height="56" rx="28" fill="none" stroke="#FF9E6B" stroke-width="2"/>
+    <text x="885" y="478" fill="#FF9E6B" text-anchor="middle">Refused</text>
+  </g>
+  <text x="470" y="580" fill="#8D94AA" font-family="'IBM Plex Mono', Menlo, monospace" font-size="22" letter-spacing="3">NEAR TESTNET PROTOTYPE</text>
+</svg>

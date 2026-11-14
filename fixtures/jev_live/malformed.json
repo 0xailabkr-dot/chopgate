@@ -1,0 +1,7 @@
+{
+  "synthetic": true,
+  "note": "hand-written fixture for offline unit tests, not a recorded JEV response",
+  "status": 200,
+  "request_id": "synthetic-malformed",
+  "body": "{\"model\": \"jev\", \"answers\": "
+}

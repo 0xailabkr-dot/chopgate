@@ -1,0 +1,79 @@
+ChopGate, Copyright 2026 0xAILab
+
+This repository is licensed under the Apache License 2.0. See LICENSE.
+
+Third-party fonts (SIL Open Font License, Version 1.1; the OFL text is the same file already used for the docs fonts, sha256 780b3ccd320f592dcd5b1664c9b88f5b06823f4dbac7fee23846af0d5ab5a29b; see docs/fonts/OFL.txt, site/verify/fonts/OFL.txt, and site/assets/fonts/OFL.txt):
+
+Four font families, five files, in docs/fonts, site/verify/fonts, and site/assets/fonts:
+
+1) Sora (variable weight)
+   Copyright 2019 The Sora Project Authors (https://github.com/sora-xor/sora-font)
+   File: Sora-VariableFont_wght.ttf
+
+2) Michroma
+   Copyright 2011 The Michroma Project Authors (https://github.com/googlefonts/Michroma-font)
+   File: Michroma-Regular.ttf
+
+3) IBM Plex Sans (variable width and weight)
+   Copyright 2019 IBM Corp. All rights reserved.
+   File: IBMPlexSans-VariableFont_wdth,wght.ttf
+
+4) IBM Plex Mono
+   Copyright 2019 IBM Corp. All rights reserved.
+   Files: IBMPlexMono-Regular.ttf, IBMPlexMono-Medium.ttf
+
+Third-party JavaScript bundled in this repository:
+
+- @hot-labs/near-connect 0.12.0, MIT License, https://github.com/hot-dao/near-selector
+  Files: site/assets/vendor/near-connect-0.12.0.bundle.mjs and site/verify/nc/near-connect-0.12.0.bundle.mjs
+  The two files are identical (sha256 0e664eb8f1bb667e09dcbef16481b3e7f18992c33fc8f9bd2ef11485b771eaf3).
+license field in package.json: MIT; the package ships no LICENSE file.
+
+MIT License
+
+Copyright (c) HOT Labs
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+- @noble/ed25519 2.3.0, MIT License, Copyright (c) 2019 Paul Miller, https://paulmillr.com
+  Bundled inside the near-connect files above (the bundle names @noble/ed25519/index.js; the version 2.3.0 is from the @noble/ed25519 package.json that was installed with that near-connect 0.12.0 tree; the bundle text does not contain the string 2.3.0).
+The MIT License (MIT)
+
+Copyright (c) 2019 Paul Miller (https://paulmillr.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+- near-connect-wallets-testnet.json (site/assets/vendor/near-connect-wallets-testnet.json, with a copy in site/verify/c2/)
+  The testnet wallet entries taken from the near-selector manifest (manifest version 1.1.0, commit b57880c29ab142f777c4a851e3c3c23752292be8, source https://raw.githubusercontent.com/hot-dao/near-selector/b57880c29ab142f777c4a851e3c3c23752292be8/repository/manifest.json, sha256 a90e85a75a154025297db2bbe06de940f3bbdcac4782e3f59eb01f8ed7fae580): meteor-wallet, intear-wallet, ledger, nightly-wallet, ethereum-wallets, near-cli. Each wallet name and icon belongs to its wallet.

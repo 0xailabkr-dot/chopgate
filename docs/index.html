@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>ChopGate — verify the testnet scenes</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="name" data-i18n="brand">ChopGate</div>
+        <div class="tag" data-i18n="tag">NEAR testnet prototype</div>
+      </div>
+      <button type="button" class="lang-btn" id="lang-btn" aria-label="Switch to Korean">한국어</button>
+    </header>
+
+    <main class="stack">
+      <section class="card demo" id="demo">
+        <div class="kicker" data-i18n="demoLabel">Demo</div>
+        <h2 data-i18n="demoTitle">A 96-second walkthrough of the local checks and the testnet scenes.</h2>
+        <p class="demo-lead" data-i18n="demoBody"></p>
+        <div class="demo-frame">
+          <video id="demo-video" controls preload="metadata" playsinline width="1920" height="1080">
+            <source src="./chopgate-demo-b.mp4" type="video/mp4">
+            <track kind="subtitles" src="./chopgate-demo-b.en.vtt" srclang="en" label="English" default>
+          </video>
+        </div>
+      </section>
+
+      <section class="card" id="problem">
+        <div class="kicker" data-i18n="problemLabel">Problem</div>
+        <h2 data-i18n="problemTitle">An agent with a wallet can be talked into paying.</h2>
+        <p data-i18n="problemBody"></p>
+      </section>
+
+      <section class="card" id="solution">
+        <div class="kicker" data-i18n="solutionLabel">Solution</div>
+        <h2 data-i18n="solutionTitle">ChopGate checks an owner-signed mandate, then pays, refuses, or holds.</h2>
+        <p data-i18n="solutionBody"></p>
+      </section>
+
+      <section class="card try" id="try">
+        <div class="kicker" data-i18n="tryLabel">Try it yourself</div>
+        <h2 data-i18n="tryTitle">Wallet attack demo: not included in this version</h2>
+        <p data-i18n="tryBody">This version does not include the wallet demo. The page only reads public RPC. Use the Verify table below.</p>
+      </section>
+
+      <section class="card" id="verify">
+        <div class="kicker" data-i18n="verifyLabel">Verify</div>
+        <h2 data-i18n="verifyTitle">Scene transactions, read from archival RPC (recorded copy as fallback).</h2>
+        <p data-i18n="verifyBody"></p>
+
+        <div class="badge-row">
+          <span class="badge" id="source-badge"><span class="dot"></span><span id="source-label" data-i18n="sourceLoading">Reading archival RPC…</span></span>
+        </div>
+
+        <h3 class="kicker kicker-follow" data-i18n="hashCompareTitle">Contract code_hash compared with the repository wasm</h3>
+        <p class="hash-lead" data-i18n="hashCompareLead"></p>
+        <div class="hash-list" id="hash-body"></div>
+
+        <h3 class="kicker kicker-gap" data-i18n="tableTitle">Scene transactions</h3>
+        <div class="scroll" id="tx-scroll">
+          <table id="tx-table">
+            <thead>
+              <tr>
+                <th data-i18n="colScene">Scene</th>
+                <th data-i18n="colHash">Transaction</th>
+                <th data-i18n="colSigner">Signer</th>
+                <th data-i18n="colVerdict">Verdict</th>
+                <th data-i18n="colReason">Reason</th>
+                <th data-i18n="colPayout">Payout</th>
+                <th data-i18n="colJev">JEV</th>
+              </tr>
+            </thead>
+            <tbody id="tx-body"></tbody>
+          </table>
+        </div>
+        <p class="note" data-i18n="selectionNote"></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="fonts" data-i18n="fontsNote"></p>
+      <p class="limits" data-i18n="footerLimits"></p>
+    </footer>
+  </div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
